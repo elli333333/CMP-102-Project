@@ -17,7 +17,7 @@ Player::Player(const int Game_Init_Type, std::string name, int accuracy) {
 
 Player::~Player() = default;
 
-std::string Player::Set_Player_Name(std::string name) {
+void Player::Set_Player_Name(std::string name) {
     Player_Name = name;
 }
 
@@ -25,7 +25,7 @@ std::string Player::Get_Player_Name() {
     return Player_Name;
 }
 
-int Player::Set_Accuracy(int accuracy) {
+void Player::Set_Accuracy(int accuracy) {
     Player_Accuracy = accuracy;
 }
 
@@ -37,13 +37,19 @@ int Player::Get_Score() {
     return Player_Score;
 }
 
-int Player::Adjust_Score(int Turn_Value) {
-    if (Turn_Value < Player_Score) {
-        Player_Score - Turn_Value;
+int Player::Adjust_Score() {
+    if (Turn_Score < Player_Score) {
+        Player_Score -= Turn_Score;
+        Turn_Score = 0;
         return 0; //Success, Score Adjusted
     }
-    else if (Turn_Value > Player_Score) {
+    else if (Turn_Score > Player_Score) {
+        Turn_Score = 0;
         ;
         return 1; //Failure, Turn over scored
     }
+}
+
+void Player::Adjust_Turn_Score(int Dart_Value) {
+    Turn_Score += Dart_Value;
 }

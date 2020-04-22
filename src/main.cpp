@@ -7,8 +7,9 @@
  * Include Vulkan Headers
  *  -> Allows GPU compute
  *  -> Large Simulations would take too long otherwise
- */
+ *
 #include <vulkan/vulkan.h>
+*/
 
 /* Include class headers */
 #include "Game.h"
@@ -26,7 +27,7 @@ const int SIMULATION_301 = 3;
 
 /* Function Prototypes */
 void Curses_Init(int t);
-void Vulkan_Init(int t);
+//void Vulkan_Init(int t);
 
 void Sleep(int);
 
@@ -36,7 +37,7 @@ void Curses_Destruct();
 int main() {
     Curses_Init(50);
 
-    Vulkan_Init(50);
+    //Vulkan_Init(50);
 
     Sleep(100);
 
@@ -58,14 +59,14 @@ int main() {
     Curses_Destruct();
 }
 
-void Vulkan_Init(int t) {
- /*
-  * Starts Vulkan environment,
-  * Detects All available GPU and capabilities
-  * Selects first available compute capable Vulkan queue,
-  * sleeps for t milliseconds after init
-  */
-}
+//void Vulkan_Init(int t) {
+// /*
+//  * Starts Vulkan environment,
+//  * Detects All available GPU and capabilities
+//  * Selects first available compute capable Vulkan queue,
+//  * sleeps for t milliseconds after init
+//  */
+//}
 
 void Curses_Init(int t) {
     /*

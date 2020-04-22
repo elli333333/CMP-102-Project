@@ -14,18 +14,22 @@ private:
 
     int Player_Score;
 
+    int Turn_Score;
+
 public:
     Player(int, std::string, int);
     ~Player();
 
     std::string Get_Player_Name();
-    std::string Set_Player_Name(std::string);
+    void Set_Player_Name(std::string);
 
     int Get_Accuracy();
-    int Set_Accuracy(int);
+    void Set_Accuracy(int);
 
     int Get_Score();
-    int Adjust_Score(int);
+    int Adjust_Score();
+
+    void Adjust_Turn_Score(int);
 };
 
 
