@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/smacdonald/Documents/Year1Semester2/CMP-102-Project/src/Board.cpp
+Board.h
+/home/smacdonald/Documents/Year1Semester2/CMP-102-Project/src/Board.h
+
+/home/smacdonald/Documents/Year1Semester2/CMP-102-Project/src/Board.h
+
