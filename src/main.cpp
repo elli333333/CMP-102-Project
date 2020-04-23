@@ -3,14 +3,6 @@
  */
 #include <curses.h>
 
-/*
- * Include Vulkan Headers
- *  -> Allows GPU compute
- *  -> Large Simulations would take too long otherwise
- *
-#include <vulkan/vulkan.h>
-*/
-
 /* Include class headers */
 #include "Game.h"
 #include "Player.h"
@@ -27,46 +19,32 @@ const int SIMULATION_301 = 3;
 
 /* Function Prototypes */
 void Curses_Init(int t);
-//void Vulkan_Init(int t);
+void Curses_Destruct();
 
 void Sleep(int);
 
-void Curses_Destruct();
+void Simulation_501();
 
 /* Main */
 int main() {
     Curses_Init(50);
 
-    //Vulkan_Init(50);
-
     Sleep(100);
 
-    const int * Game_Init_Type = &SIMULATION_501;
+    Simulation_501();
 
-    Player Sid(* Game_Init_Type, "Sid", 75);
-    Player Joe(* Game_Init_Type, "Joe", 75);
-
-    if (* Game_Init_Type == SIMULATION_501) {
-        /* DO SOMETHING */
-    }
-    else if (* Game_Init_Type == INTERACTIVE) {
-        printw("Mode not Implemented");
-    }
-    else if (* Game_Init_Type == SIMULATION_301) {
-        printw("Mode Not Implemented");
-    }
+//    if (* Game_Init_Type == SIMULATION_501) {
+//        Simulation_501();
+//    }
+//    else if (* Game_Init_Type == INTERACTIVE) {
+//        printw("Mode not Implemented");
+//    }
+//    else if (* Game_Init_Type == SIMULATION_301) {
+//        printw("Mode Not Implemented");
+//    }
 
     Curses_Destruct();
 }
-
-//void Vulkan_Init(int t) {
-// /*
-//  * Starts Vulkan environment,
-//  * Detects All available GPU and capabilities
-//  * Selects first available compute capable Vulkan queue,
-//  * sleeps for t milliseconds after init
-//  */
-//}
 
 void Curses_Init(int t) {
     /*
@@ -114,4 +92,15 @@ void Sleep(int t) {
      * parameter 't' is time in milliseconds
      */
     boost::this_thread::sleep_for (boost::chrono::milliseconds(t));
+}
+
+void Simulation_501() {
+    /*
+     * Code Path for the basic Monte Carlo Simulation of a Standard 501 Darts game
+     */
+
+    const int * Game_Init_Type = &SIMULATION_501;
+
+    Player Sid(* Game_Init_Type, "Sid", 75);
+    Player Joe(* Game_Init_Type, "Joe", 75);
 }
