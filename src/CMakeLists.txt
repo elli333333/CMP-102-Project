@@ -8,8 +8,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(CMP102_Week6
                 main.cpp
-                Game.h
-                Game.cpp
                 Board.h
                 Board.cpp
                 Player.h

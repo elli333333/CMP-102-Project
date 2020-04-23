@@ -16,8 +16,14 @@ private:
 
     int Turn_Score;
 
+
 public:
-    Player(int, std::string, int);
+    int Rounds_Won = 0;
+    int Matches_Won = 0;
+    int Sets_Won = 0;
+    int Games_Won = 0;
+
+    Player(std::string, int);
     ~Player();
 
     std::string Get_Player_Name();

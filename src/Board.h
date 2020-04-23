@@ -16,7 +16,7 @@ public:
 
     int Throw_Dart(int, int, int);
     /*
-     * Target, Player_Accuracy
+     * Target, Player_Accuracy, Multiplier
      * Returning throw score
      */
 };

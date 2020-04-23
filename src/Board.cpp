@@ -132,9 +132,7 @@ int Board::Throw_Dart(int Target, int Player_Accuracy, int Multiplier) {
         }
     }
     else if (rand < Player_Accuracy_Clone and Target >= 25) {
-        /*
-         * Special case if target is the bull
-         */
+        /* Special case if target is the bull */
         rand = std::experimental::randint(0, 20);
         if (Target == 50) {
             if (rand < 10) {
@@ -154,9 +152,7 @@ int Board::Throw_Dart(int Target, int Player_Accuracy, int Multiplier) {
         }
     }
     else {
-        /*
-         * Catch all clause in case the above fall through
-         */
+        /* Catch all clause in case the above fall through */
         return 0;
     }
 

@@ -4,18 +4,12 @@
 #include <curses.h>
 
 /* Include class headers */
-#include "Game.h"
 #include "Player.h"
 #include "Board.h"
 
-/* Define "Shorthand" for different game types */
-const int INTERACTIVE = 1;
-const int SIMULATION_501 = 2;
-const int SIMULATION_301 = 3;
-
-/* Boost C++ Library timing */
-#include <boost/chrono.hpp>
-#include <boost/thread.hpp>
+/* Standard Library C++ Library timing */
+#include <chrono>
+#include <thread>
 
 /* Function Prototypes */
 void Curses_Init(int t);
@@ -32,16 +26,6 @@ int main() {
     Sleep(100);
 
     Simulation_501();
-
-//    if (* Game_Init_Type == SIMULATION_501) {
-//        Simulation_501();
-//    }
-//    else if (* Game_Init_Type == INTERACTIVE) {
-//        printw("Mode not Implemented");
-//    }
-//    else if (* Game_Init_Type == SIMULATION_301) {
-//        printw("Mode Not Implemented");
-//    }
 
     Curses_Destruct();
 }
@@ -88,10 +72,10 @@ void Curses_Destruct() {
 
 void Sleep(int t) {
     /*
-     * Wrapper function for sleep using boost C++ thread and chrono.
+     * Wrapper function for sleep using Standard Library C++ thread and chrono.
      * parameter 't' is time in milliseconds
      */
-    boost::this_thread::sleep_for (boost::chrono::milliseconds(t));
+    std::this_thread::sleep_for (std::chrono::milliseconds(t));
 }
 
 void Simulation_501() {
@@ -99,8 +83,18 @@ void Simulation_501() {
      * Code Path for the basic Monte Carlo Simulation of a Standard 501 Darts game
      */
 
-    const int * Game_Init_Type = &SIMULATION_501;
+    Player Sid("Sid", 75);
+    Player Joe("Joe", 75);
 
-    Player Sid(* Game_Init_Type, "Sid", 75);
-    Player Joe(* Game_Init_Type, "Joe", 75);
+    Board Dart_Board;
+
+    for (int i = 0; i < 10000; i++) {
+        do {
+            do {
+                do {
+
+                } while (Sid.Get_Score() != 0 and Joe.Get_Score() != 0);
+            } while (Sid.Matches_Won < 3 and Joe.Matches_Won < 3);
+        } while (Sid.Sets_Won < 7 and Joe.Sets_Won < 7);
+    }
 }

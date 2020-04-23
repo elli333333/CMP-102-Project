@@ -1,1 +1,0 @@
-/usr/bin/clang++  -g   CMakeFiles/CMP102_Week6.dir/main.cpp.o CMakeFiles/CMP102_Week6.dir/Game.cpp.o CMakeFiles/CMP102_Week6.dir/Board.cpp.o CMakeFiles/CMP102_Week6.dir/Player.cpp.o  -o CMP102_Week6  -lcurses -lform 

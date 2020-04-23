@@ -4,15 +4,11 @@
 
 #include "Player.h"
 
-Player::Player(const int Game_Init_Type, std::string name, int accuracy) {
-    if (Game_Init_Type == 1 /* Interactive */ or Game_Init_Type == 2 /* 501 Simulation */) {
-        Player_Score = 501;
-    }
-    else if (Game_Init_Type == 3) {
-        Player_Score = 301;
-    }
+Player::Player(std::string name, int accuracy) {
     Player_Name = name;
     Player_Accuracy = accuracy;
+    Turn_Score = 0;
+    Player_Score = 501;
 }
 
 Player::~Player() = default;
