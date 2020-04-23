@@ -21,9 +21,9 @@ const int INTERACTIVE = 1;
 const int SIMULATION_501 = 2;
 const int SIMULATION_301 = 3;
 
-/* Standard Library timing */
-#include <chrono>
-#include <thread>
+/* Boost C++ Library timing */
+#include <boost/chrono.hpp>
+#include <boost/thread.hpp>
 
 /* Function Prototypes */
 void Curses_Init(int t);
@@ -70,8 +70,8 @@ int main() {
 
 void Curses_Init(int t) {
     /*
-     * Function calls all curses Initialiation functions,
-     * Sets up the window, and finaly prints welcome message
+     * Function calls all curses Initialisation functions,
+     * Sets up the window, and finally prints welcome message
      * takes int t - time(ms) to sleep after init
      * before clearing display
      */
@@ -92,7 +92,7 @@ void Curses_Init(int t) {
     Sleep(t);
 
     clear();
-    printw("Curses Started Successfully, Starting Vulkan...");
+    printw("Curses Started Successfully.");
     refresh();
 }
 
@@ -110,8 +110,8 @@ void Curses_Destruct() {
 
 void Sleep(int t) {
     /*
-     * Wrapper function for stdlib sleep using thread and chrono.
+     * Wrapper function for sleep using boost C++ thread and chrono.
      * parameter 't' is time in milliseconds
      */
-    std::this_thread::sleep_for (std::chrono::milliseconds(t));
+    boost::this_thread::sleep_for (boost::chrono::milliseconds(t));
 }

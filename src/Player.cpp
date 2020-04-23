@@ -29,11 +29,11 @@ void Player::Set_Accuracy(int accuracy) {
     Player_Accuracy = accuracy;
 }
 
-int Player::Get_Accuracy() {
+int Player::Get_Accuracy() const {
     return Player_Accuracy;
 }
 
-int Player::Get_Score() {
+int Player::Get_Score() const {
     return Player_Score;
 }
 
@@ -45,7 +45,6 @@ int Player::Adjust_Score() {
     }
     else if (Turn_Score > Player_Score) {
         Turn_Score = 0;
-        ;
         return 1; //Failure, Turn over scored
     }
 }

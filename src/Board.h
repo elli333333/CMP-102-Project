@@ -19,13 +19,11 @@ public:
     Board();
     ~Board();
 
-    int Throw_Dart(int, int);
+    int Throw_Dart(int, int, int);
     /*
      * Target, Player_Accuracy
      * Returning throw score
      */
-
 };
-
 
 #endif //CMP_102_PROJECT_BOARD_H

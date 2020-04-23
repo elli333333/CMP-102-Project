@@ -23,10 +23,10 @@ public:
     std::string Get_Player_Name();
     void Set_Player_Name(std::string);
 
-    int Get_Accuracy();
+    int Get_Accuracy() const;
     void Set_Accuracy(int);
 
-    int Get_Score();
+    int Get_Score() const;
     int Adjust_Score();
 
     void Adjust_Turn_Score(int);
