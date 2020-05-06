@@ -1,0 +1,89 @@
+//
+// Created by smacdonald on 06/05/2020.
+//
+
+#include "Match.h"
+
+Match::Match() = default;
+
+Match::Score Match::Run_Match(Player Player_0, Player Player_1) {
+    int Set_Winner = 0;
+
+    int Score_P0 = 0;
+    int Score_P1 = 0;
+
+    do {
+        Set_Winner = Run_Set(Player_0, Player_1);
+        switch (Set_Winner) {
+            case 0:
+                Score_P0 ++;
+                break;
+            case 1:
+                Score_P1 ++;
+                break;
+            default:
+                break;
+        }
+    } while ((Score_P0 != 7) and (Score_P1 != 7));
+
+    Match::Score Return_Value;
+
+    Return_Value.Score_P0 = Score_P0;
+    Return_Value.Score_P1 = Score_P1;
+
+    return Return_Value;
+}
+
+int Match::Run_Set(Player Player_0, Player Player_1) {
+    int Game_Winner = 0;
+
+    int Score_P0 = 0;
+    int Score_P1 = 0;
+
+    do {
+        Game_Winner = Run_Game(Player_0, Player_1);
+        switch (Game_Winner) {
+            case 0:
+                Score_P0 ++;
+                break;
+            case 1:
+                Score_P1 ++;
+                break;
+            default:
+                return 2;
+        }
+
+    } while ((Score_P0 != 7) and (Score_P1 != 7));
+
+    if (Score_P0 == 3) {
+        return 0;
+    }
+    else if (Score_P1 == 2) {
+        return 1;
+    }
+    else {
+        return 2;
+    }
+}
+
+int Match::Run_Game(Player Player_0, Player Player_1) {
+    Player_0.Reset_Score();
+    Player_1.Reset_Score();
+
+    int Score_P0 = 0;
+    int Score_P1 = 0;
+
+    do {
+        do {
+        } while ((Player_0.Get_Score() != 0) and (Player_1.Get_Score() != 0));
+
+        if ((Player_0.Get_Score() == 0) and (Player_1.Get_Score() != 0)) {
+            Score_P0 ++;
+        }
+        else if ((Player_1.Get_Score() == 0) and (Player_0.Get_Score() != 0)) {
+            Score_P1 ++;
+        }
+
+    } while ((Score_P0 != 3) and (Score_P1 != 3));
+
+}

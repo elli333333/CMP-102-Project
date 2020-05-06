@@ -16,14 +16,12 @@ private:
 
     int Turn_Score;
 
+    int Dart_Board[20] = {20, 1,  18, 4,  13, 6,  10, 15, 2,  17, 3,  19, 7,  16, 8,  11, 14, 9,  12, 5};
 
 public:
-    int Rounds_Won = 0;
-    int Matches_Won = 0;
-    int Sets_Won = 0;
-    int Games_Won = 0;
 
     Player(std::string, int);
+    Player();
     ~Player();
 
     std::string Get_Player_Name();
@@ -34,8 +32,9 @@ public:
 
     int Get_Score() const;
     int Adjust_Score();
+    void Reset_Score();
 
-    void Adjust_Turn_Score(int);
+    void Throw_Dart();
 };
 
 

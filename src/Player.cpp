@@ -4,6 +4,8 @@
 
 #include "Player.h"
 
+Player::Player() = default;
+
 Player::Player(std::string name, int accuracy) {
     Player_Name = name;
     Player_Accuracy = accuracy;
@@ -33,6 +35,10 @@ int Player::Get_Score() const {
     return Player_Score;
 }
 
+void Player::Reset_Score() {
+    Player_Score = 501;
+}
+
 int Player::Adjust_Score() {
     if (Turn_Score < Player_Score) {
         Player_Score -= Turn_Score;
@@ -43,8 +49,28 @@ int Player::Adjust_Score() {
         Turn_Score = 0;
         return 1; //Failure, Turn over scored
     }
+    else {
+        return 2;
+    }
 }
 
-void Player::Adjust_Turn_Score(int Dart_Value) {
-    Turn_Score += Dart_Value;
+
+void Player::Throw_Dart() {
+    /*
+     * Throws dart at a self determined target,
+     * Target is Triple 20 until below score of 180
+     */
+
+    int Target = 0;
+    int Multiplier = 1;
+
+    if (Player_Score > 180) {
+        Target = 20;
+        Multiplier = 3;
+    }
+    else if (Player_Score <= 180) {
+
+    }
 }
+
+

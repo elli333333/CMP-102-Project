@@ -5,7 +5,7 @@
 
 /* Include class headers */
 #include "Player.h"
-#include "Board.h"
+#include "Match.h"
 
 /* Standard Library C++ Library timing */
 #include <chrono>
@@ -44,7 +44,10 @@ void Curses_Init(int t) {
     /* Suppresses character echos */
     noecho();
 
-    /* Sets Terminal mode */
+    /*
+     * Sets Terminal mode,
+     * Removes Input delay and need for Enter to be pressed
+     */
     cbreak();
 
     /* Print test message */
@@ -54,7 +57,6 @@ void Curses_Init(int t) {
     Sleep(t);
 
     clear();
-    printw("Curses Started Successfully.");
     refresh();
 }
 
@@ -80,21 +82,95 @@ void Sleep(int t) {
 
 void Simulation_501() {
     /*
-     * Code Path for the basic Monte Carlo Simulation of a Standard 501 Darts game
+     * Basic Monte Carlo Simulation of a Standard 501 Darts game
      */
 
-    Player Sid("Sid", 75);
-    Player Joe("Joe", 75);
+    Player Player_0("Sid", 75);
+    Player Player_1("Joe", 75);
 
-    Board Dart_Board;
+
+    struct Rounds_Won {
+        /* Player_One/Player_Two */
+        int seven_6 = 0,
+            seven_5 = 0,
+            seven_4 = 0,
+            seven_3 = 0,
+            seven_2 = 0,
+            seven_1 = 0,
+            six_7 = 0,
+            five_7 = 0,
+            four_7 = 0,
+            three_7 = 0,
+            two_7 = 0,
+            one_7 = 0;
+    };
+
+    Rounds_Won Win_Rates;
+
+    Match Active_Match;
+    Match::Score Match_Score;
+
+    /* Begin timer for simulation loop */
+    std::chrono::steady_clock::time_point Timer_Start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < 10000; i++) {
-        do {
-            do {
-                do {
-
-                } while (Sid.Get_Score() != 0 and Joe.Get_Score() != 0);
-            } while (Sid.Matches_Won < 3 and Joe.Matches_Won < 3);
-        } while (Sid.Sets_Won < 7 and Joe.Sets_Won < 7);
+        Match_Score = Active_Match.Run_Match(Player_0, Player_1);
+        if (Match_Score.Score_P0 == 7) {
+            switch (Match_Score.Score_P1) {
+                case 1:
+                    Win_Rates.seven_1 ++;
+                    break;
+                case 2:
+                    Win_Rates.seven_2 ++;
+                    break;
+                case 3:
+                    Win_Rates.seven_3 ++;
+                    break;
+                case 4:
+                    Win_Rates.seven_4 ++;
+                    break;
+                case 5:
+                    Win_Rates.seven_5 ++;
+                    break;
+                case 6:
+                    Win_Rates.seven_6 ++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (Match_Score.Score_P1 == 7) {
+            switch (Match_Score.Score_P0) {
+                case 1:
+                    Win_Rates.one_7 ++;
+                    break;
+                case 2:
+                    Win_Rates.two_7 ++;
+                    break;
+                case 3:
+                    Win_Rates.three_7 ++;
+                    break;
+                case 4:
+                    Win_Rates.four_7 ++;
+                    break;
+                case 5:
+                    Win_Rates.five_7 ++;
+                    break;
+                case 6:
+                    Win_Rates.six_7 ++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            ;
+        }
     }
+
+    /* End timer for simulation loop */
+    std::chrono::steady_clock::time_point Timer_End = std::chrono::steady_clock::now();
+
+    std::chrono::duration_cast<std::chrono::microseconds>(Timer_End - Timer_Start)
+
 }

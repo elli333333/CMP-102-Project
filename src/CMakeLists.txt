@@ -7,10 +7,10 @@ include_directories(${CURSES_INCLUDE_DIR})
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(CMP102_Week6
-                main.cpp
-                Board.h
-                Board.cpp
-                Player.h
-                Player.cpp)
+        main.cpp
+        Player.h
+        Player.cpp
+        Match.cpp
+        Match.h)
 
 target_link_libraries(CMP102_Week6 ${CURSES_LIBRARIES})

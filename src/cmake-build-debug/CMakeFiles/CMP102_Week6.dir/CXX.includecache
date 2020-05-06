@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/smacdonald/Documents/Year1Semester2/CMP-102-Project/src/Player.cpp
+Player.h
+/home/smacdonald/Documents/Year1Semester2/CMP-102-Project/src/Player.h
+
+/home/smacdonald/Documents/Year1Semester2/CMP-102-Project/src/Player.h
+string
+-
+
