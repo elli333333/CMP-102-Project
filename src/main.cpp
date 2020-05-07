@@ -1,8 +1,3 @@
-/* Include curses headers
- *  -> used for TUI
- */
-#include <curses.h>
-
 /* Include class headers */
 #include "Player.h"
 #include "Match.h"
@@ -11,73 +6,15 @@
 #include <chrono>
 #include <thread>
 
+/* iostream */
+#include <iostream>
+
 /* Function Prototypes */
-void Curses_Init(int t);
-void Curses_Destruct();
-
-void Sleep(int);
-
 void Simulation_501();
 
 /* Main */
 int main() {
-    Curses_Init(50);
-
-    Sleep(100);
-
     Simulation_501();
-
-    Curses_Destruct();
-}
-
-void Curses_Init(int t) {
-    /*
-     * Function calls all curses Initialisation functions,
-     * Sets up the window, and finally prints welcome message
-     * takes int t - time(ms) to sleep after init
-     * before clearing display
-     */
-
-    /* Starts curses */
-    initscr();
-
-    /* Suppresses character echos */
-    noecho();
-
-    /*
-     * Sets Terminal mode,
-     * Removes Input delay and need for Enter to be pressed
-     */
-    cbreak();
-
-    /* Print test message */
-    printw("Hello World!");
-    refresh();
-
-    Sleep(t);
-
-    clear();
-    refresh();
-}
-
-void Curses_Destruct() {
-    /*
-     * Cleanly exits Curses mode,
-     * Without this the terminal may not function correctly after program exit,
-     * Clears windows and exits, resetting the terminal.
-     */
-
-    clear();
-    refresh();
-    endwin();
-}
-
-void Sleep(int t) {
-    /*
-     * Wrapper function for sleep using Standard Library C++ thread and chrono.
-     * parameter 't' is time in milliseconds
-     */
-    std::this_thread::sleep_for (std::chrono::milliseconds(t));
 }
 
 void Simulation_501() {
@@ -86,54 +23,40 @@ void Simulation_501() {
      */
 
     Player Player_0("Sid", 75);
-    Player Player_1("Joe", 75);
+    Player Player_1("Joe", 80);
 
-
-    struct Rounds_Won {
-        /* Player_One/Player_Two */
-        int seven_6 = 0,
-            seven_5 = 0,
-            seven_4 = 0,
-            seven_3 = 0,
-            seven_2 = 0,
-            seven_1 = 0,
-            six_7 = 0,
-            five_7 = 0,
-            four_7 = 0,
-            three_7 = 0,
-            two_7 = 0,
-            one_7 = 0;
-    };
-
-    Rounds_Won Win_Rates;
+    int Win_Rates[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     Match Active_Match;
     Match::Score Match_Score;
 
-    /* Begin timer for simulation loop */
-    std::chrono::steady_clock::time_point Timer_Start = std::chrono::steady_clock::now();
+    int Matches = 10;
 
-    for (int i = 0; i < 10000; i++) {
+    std::cout << "501 Simple Darts Simulation" << std::endl;
+    std::cout << "Starting Simulation\n";
+
+    for (int i = 0; i < Matches; i++) {
+        std::cout << "Running Match: " << i << std::endl;
         Match_Score = Active_Match.Run_Match(Player_0, Player_1);
         if (Match_Score.Score_P0 == 7) {
             switch (Match_Score.Score_P1) {
                 case 1:
-                    Win_Rates.seven_1 ++;
+                    Win_Rates[0] ++;
                     break;
                 case 2:
-                    Win_Rates.seven_2 ++;
+                    Win_Rates[1] ++;
                     break;
                 case 3:
-                    Win_Rates.seven_3 ++;
+                    Win_Rates[2] ++;
                     break;
                 case 4:
-                    Win_Rates.seven_4 ++;
+                    Win_Rates[3] ++;
                     break;
                 case 5:
-                    Win_Rates.seven_5 ++;
+                    Win_Rates[4] ++;
                     break;
                 case 6:
-                    Win_Rates.seven_6 ++;
+                    Win_Rates[5] ++;
                     break;
                 default:
                     break;
@@ -142,35 +65,62 @@ void Simulation_501() {
         else if (Match_Score.Score_P1 == 7) {
             switch (Match_Score.Score_P0) {
                 case 1:
-                    Win_Rates.one_7 ++;
+                    Win_Rates[6] ++;
                     break;
                 case 2:
-                    Win_Rates.two_7 ++;
+                    Win_Rates[7] ++;
                     break;
                 case 3:
-                    Win_Rates.three_7 ++;
+                    Win_Rates[8] ++;
                     break;
                 case 4:
-                    Win_Rates.four_7 ++;
+                    Win_Rates[9] ++;
                     break;
                 case 5:
-                    Win_Rates.five_7 ++;
+                    Win_Rates[10] ++;
                     break;
                 case 6:
-                    Win_Rates.six_7 ++;
+                    Win_Rates[11] ++;
                     break;
                 default:
                     break;
             }
         }
-        else {
-            ;
+    }
+
+    std::cout << "\rSimulation Complete";
+
+    /* Calculate percentage match result frequency */
+    int Result_Frequencies[12];
+    for (int i = 0; i < 12; i++) {
+        Result_Frequencies[i] = (Win_Rates[i] / Matches) * 100;
+    }
+
+    /* Find most frequent result */
+    int Most_Frequent =  0;
+    for (int Result_Frequency : Result_Frequencies) {
+        if (Result_Frequency > Most_Frequent) {
+            Most_Frequent = Result_Frequency;
         }
     }
 
-    /* End timer for simulation loop */
-    std::chrono::steady_clock::time_point Timer_End = std::chrono::steady_clock::now();
+    /* Display Output */
+    std::cout << "\rSimulation Results" << std::endl;
 
-    std::chrono::duration_cast<std::chrono::microseconds>(Timer_End - Timer_Start)
+    std::cout << Player_0.Get_Player_Name() << " " << Player_1.Get_Player_Name() << std::endl;
+    std::cout << "7:1\t" << Result_Frequencies[0] << std::endl;
+    std::cout << "7:2\t" << Result_Frequencies[1] << std::endl;
+    std::cout << "7:3\t" << Result_Frequencies[2] << std::endl;
+    std::cout << "7:4\t" << Result_Frequencies[3] << std::endl;
+    std::cout << "7:5\t" << Result_Frequencies[4] << std::endl;
+    std::cout << "7:6\t" << Result_Frequencies[5] << std::endl;
+    std::cout << "1:7\t" << Result_Frequencies[6] << std::endl;
+    std::cout << "2:7\t" << Result_Frequencies[7] << std::endl;
+    std::cout << "3:7\t" << Result_Frequencies[8] << std::endl;
+    std::cout << "4:7\t" << Result_Frequencies[9] << std::endl;
+    std::cout << "5:7\t" << Result_Frequencies[10] << std::endl;
+    std::cout << "6:7\t" << Result_Frequencies[11] << std::endl;
 
+
+    std::cout << "Most Common Result: " << Most_Frequent << std::endl;
 }
